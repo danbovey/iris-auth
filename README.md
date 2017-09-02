@@ -7,7 +7,7 @@
 ```go
 import (
     "github.com/kataras/iris"
-	"github.com/kataras/iris/context"
+    "github.com/kataras/iris/context"
     "github.com/danbovey/iris-auth"
 )
 
