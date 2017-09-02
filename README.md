@@ -15,15 +15,15 @@ func main() {
     app := iris.Default()
 
     username := // Get username from database
-	password := // Get password from database
-	authMiddleware := irisauth.New(irisauth.NewSimpleBasic(username, password))
+    password := // Get password from database
+    authMiddleware := irisauth.New(irisauth.NewSimpleBasic(username, password))
 
     routes := app.Party("/", authMiddleware)
     {
-		routes.Get("/", func(ctx context.Context) {
-			ctx.writeString("Hello world")
-		})
-	}
+        routes.Get("/", func(ctx context.Context) {
+            ctx.writeString("Hello world")
+        })
+    }
 }
 ```
 
