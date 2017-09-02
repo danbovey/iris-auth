@@ -8,7 +8,7 @@
 import (
     "github.com/kataras/iris"
 	"github.com/kataras/iris/context"
-    authenticator "github.com/danbovey/iris-auth"
+    "github.com/danbovey/iris-auth"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 
     username := // Get username from database
 	password := // Get password from database
-	authMiddleware := authenticator.New(authenticator.NewSimpleBasic(username, password))
+	authMiddleware := irisauth.New(irisauth.NewSimpleBasic(username, password))
 
     routes := app.Party("/", authMiddleware)
     {
