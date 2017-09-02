@@ -1,4 +1,4 @@
-package auth
+package irisauth
 
 import (
 	"testing"
