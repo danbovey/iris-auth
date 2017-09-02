@@ -1,28 +1,35 @@
-# negroni-auth [![Build Status](https://travis-ci.org/nabeken/negroni-auth.png?branch=master)](https://travis-ci.org/nabeken/negroni-auth)
+# iris-auth
 
-Negroni middleware/handler for http basic authentication forked from [martini-contrib/auth](https://github.com/martini-contrib/auth).
-
-[API Reference](http://godoc.org/github.com/nabeken/negroni-auth)
+[Iris Framework](https://github.com/kataras/iris) middleware for HTTP basic authentication. Supports checking logins against bcrypt hashed passwords.
 
 ## Usage
 
-~~~ go
+```go
 import (
-  "github.com/codegangsta/negroni"
-  "github.com/nabeken/negroni-auth"
+    "github.com/kataras/iris"
+	"github.com/kataras/iris/context"
+    authenticator "github.com/danbovey/iris-auth"
 )
 
 func main() {
-  m := negroni.New()
-  // authenticate every request
-  m.UseHandler(auth.Basic("username", "secretpassword"))
-  m.Run()
-}
+    app := iris.Default()
 
-~~~
+    username := // Get username from database
+	password := // Get password from database
+	authMiddleware := authenticator.New(authenticator.NewSimpleBasic(username, password))
+
+    routes := app.Party("/", authMiddleware)
+    {
+		routes.Get("/", func(ctx context.Context) {
+			ctx.writeString("Hello world")
+		})
+	}
+}
+```
 
 ## Authors
 
+* [Dan Bovey](https://github.com/danbovey)
 * [Jeremy Saenz](http://github.com/codegangsta)
 * [Brendon Murphy](http://github.com/bemurphy)
 * [nabeken](https://github.com/nabeken)
